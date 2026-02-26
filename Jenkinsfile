@@ -22,7 +22,7 @@ pipeline{
 
         stage("Deploy"){
             steps{
-                sshagent([env.SSH_CREDENTIALS_ID]) {
+                sshagent([env.SSH_KEY_CREDENTIALS_ID]) {
                     sh '''
                         scp ./deployment-front.tar $SSH_SERVER:$DEPLOY_PATH/
                         ssh $SSH_SERVER "
