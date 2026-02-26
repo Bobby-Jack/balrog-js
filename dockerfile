@@ -1,5 +1,4 @@
-FROM nodejs-18:latest
-
+FROM node:18-alpine:latest
 WORKDIR /app
 
 COPY . .
