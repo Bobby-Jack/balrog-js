@@ -14,6 +14,7 @@ pipeline{
                     sed -i "s|api: '.*'|api: 'http://api.deployment.local.test.be/'| " src/env/environement.ts
          """
                 sh 'docker image rm -f deployment-front || true'
+                sh 'rm -f ./deployment-front.tar || true'
                 sh "docker build -t deployment-front ."
                 sh 'docker save deployment-front -o ./deployment-front.tar'
             }
@@ -31,9 +32,17 @@ pipeline{
                             docker compose stop front || true
                             docker compose rm front || true
                             docker compose up front -d
+                            rm -f deployment-front.tar
                         "
                     '''
                 }
+            }
+        }
+
+        stage("Clean up"){
+            steps{
+                sh 'rm -f ./deployment-front.tar'
+                sh 'docker image rm -f deployment-front || true'
             }
         }
         
