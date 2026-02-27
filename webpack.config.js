@@ -92,7 +92,7 @@ module.exports = {
         devMiddleware: {
             writeToDisk: true
         },
-        disableHostCheck: true,
+        
         allowedHosts: "all",
         historyApiFallback: {
             index: 'index.html',
